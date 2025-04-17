@@ -17,7 +17,7 @@ export default function App() {
     },
   };
 
-  const shrunkScale = 1;
+  const shrunkScale = 0.5;
   const grownScale = 2;
 
   const scale = useRef(new Animated.Value(shrunkScale)).current;
