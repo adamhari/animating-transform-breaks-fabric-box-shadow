@@ -1,41 +1,43 @@
 import React, { useRef, useState } from 'react';
-import { Animated, Pressable, StyleSheet, View } from 'react-native';
+import { Animated, Pressable, View } from 'react-native';
 
 export default function App() {
-  const scale = useRef(new Animated.Value(1)).current;
-  const [isScaled, setIsScaled] = useState(false);
+  const styles = {
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    box: {
+      width: 50,
+      height: 50,
+      backgroundColor: 'skyblue',
+      borderRadius: 8,
+      boxShadow: '0 0 8px 8px rgba(0, 0, 0, 0.3)',
+    },
+  };
+
+  const shrunkScale = 1;
+  const grownScale = 2;
+
+  const scale = useRef(new Animated.Value(shrunkScale)).current;
+  const [isGrown, setIsGrown] = useState(false);
 
   const animateScale = () => {
     Animated.spring(scale, {
-      toValue: isScaled ? 1 : 3,
+      toValue: isGrown ? grownScale : shrunkScale,
       useNativeDriver: true,
       friction: 5,
       tension: 150,
-    }).start(() => {
-      setIsScaled(!isScaled);
-    });
+    }).start();
+    setIsGrown(!isGrown);
   };
 
   return (
     <View style={styles.container}>
       <Pressable onPress={animateScale}>
-        <Animated.View style={[styles.box, { transform: [{ scale }] }]} />
+        <Animated.View style={[styles.box, { transform: [{ scale }] }]}/>
       </Pressable>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  box: {
-    width: 50,
-    height: 50,
-    backgroundColor: 'skyblue',
-    borderRadius: 8,
-    boxShadow: '0 0 8px 8px rgba(0, 0, 0, 0.3)',
-  },
-});
