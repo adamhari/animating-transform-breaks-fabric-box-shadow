@@ -1,22 +1,7 @@
-import React, { useRef, useState } from 'react';
-import { Animated, Pressable, View } from 'react-native';
+import React, {useRef, useState} from 'react';
+import {Animated, Pressable, View} from 'react-native';
 
 export default function App() {
-  const styles = {
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    box: {
-      width: 50,
-      height: 50,
-      backgroundColor: 'skyblue',
-      borderRadius: 8,
-      boxShadow: '0 0 8px 8px rgba(0, 0, 0, 0.3)',
-    },
-  };
-
   const shrunkScale = 0.5;
   const grownScale = 2;
 
@@ -34,9 +19,25 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
       <Pressable onPress={animateScale}>
-        <Animated.View style={[styles.box, { transform: [{ scale }] }]}/>
+        <Animated.View
+          style={[
+            {
+              width: 50,
+              height: 50,
+              backgroundColor: 'skyblue',
+              borderRadius: 8,
+              boxShadow: '0 0 8px 8px rgba(0, 0, 0, 0.3)',
+            },
+            {transform: [{scale}]},
+          ]}
+        />
       </Pressable>
     </View>
   );
